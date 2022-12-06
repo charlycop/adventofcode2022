@@ -1,6 +1,6 @@
 from enum import IntEnum
 
-filename         = 'inputs.txt'
+filename = 'adventofcode/day02/inputs.txt'
 shape_points     = {"X" : 1, "Y" : 2, "Z" : 3}
 outcome_decode   = {"X" : "lost", "Y" : "draw", "Z" : "won"}
 outcome_points   = {"won" : 6, "draw" : 3, "lost" : 0}

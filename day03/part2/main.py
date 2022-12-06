@@ -1,4 +1,4 @@
-filename = 'inputs.txt'
+filename = 'adventofcode/day03/inputs.txt'
 datas = []
 somme = 0
 nb_lettres = ord('Z') - ord('A') + 1

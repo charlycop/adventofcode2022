@@ -6,7 +6,7 @@ class Docks(IntEnum):
    secondelf_begin = 2
    secondelf_end   = 3
 
-filename = 'inputs.txt'
+filename = 'adventofcode/day04/inputs.txt'
 datas = []
 somme = 0
 
