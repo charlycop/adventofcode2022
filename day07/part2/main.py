@@ -118,6 +118,7 @@ for line in datas:
 #to do the last one
 add_to_dictionnary(folders_depth.pop())
 
+# Search for folder to delete
 unused_space = get_quickly_unused_space(total_size)
 space_needed = UNUSED_SPACE_TH - unused_space
 
