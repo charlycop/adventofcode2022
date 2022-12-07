@@ -66,8 +66,9 @@ for line in datas:
             folders_depth.append([dest, SIZE_ZERO])
     
     elif is_a_size(line):
-        folders_depth[CURRENT][SIZE] += int(line[SIZE_POSITION])
-        total_size += folders_depth[CURRENT][SIZE]
+        size = int(line[SIZE_POSITION])
+        folders_depth[CURRENT][SIZE] += size
+        total_size                   += size
 
 #to do the last one
 add_to_dictionnary(folders_depth.pop())
