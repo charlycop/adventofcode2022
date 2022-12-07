@@ -1,4 +1,11 @@
-# declare constants 
+"""
+   _____                _              _       
+  / ____|              | |            | |      
+ | |     ___  _ __  ___| |_ __ _ _ __ | |_ ___ 
+ | |    / _ \| '_ \/ __| __/ _` | '_ \| __/ __|
+ | |___| (_) | | | \__ \ || (_| | | | | |_\__ \
+  \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
+"""
 FILENAME        = 'adventofcode/day07/inputs.txt'
 ROOT            = 0
 CD_CMD_POSITION = 1
@@ -13,7 +20,14 @@ SIZE            = 1
 NAME            = 0
 SIZE_ZERO       = 0
 
-# declare globals
+"""
+   _____ _       _           _     
+  / ____| |     | |         | |    
+ | |  __| | ___ | |__   __ _| |___ 
+ | | |_ | |/ _ \| '_ \ / _` | / __|
+ | |__| | | (_) | |_) | (_| | \__ \
+  \_____|_|\___/|_.__/ \__,_|_|___/
+"""                                                
 datas = []
 directories_dict     = {}
 level_counter        = ROOT
@@ -22,7 +36,14 @@ total_size           = 0
 somme_size           = 0
 numbers_of_folder    = 0
 
-#Functions
+"""
+  ______                _   _                 
+ |  ____|              | | (_)                
+ | |__ _   _ _ __   ___| |_ _  ___  _ __  ___ 
+ |  __| | | | '_ \ / __| __| |/ _ \| '_ \/ __|
+ | |  | |_| | | | | (__| |_| | (_) | | | \__ \
+ |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
+"""
 def is_a_size(line):
     size_str = line[0]
     return (ord(size_str[0]) > 47 and ord(size_str[0]) < 58)
@@ -42,6 +63,16 @@ def add_to_dictionnary(folder):
     directories_dict[child_folder[NAME]] = child_folder[SIZE]      #record it into the final dictionnary
     folders_depth[CURRENT][SIZE] += child_folder[SIZE]             #add the size to the parent directory
 
+""" 
+  _____                                     
+ |  __ \                                    
+ | |__) | __ ___   __ _ _ __ __ _ _ __ ___  
+ |  ___/ '__/ _ \ / _` | '__/ _` | '_ ` _ \ 
+ | |   | | | (_) | (_| | | | (_| | | | | | |
+ |_|   |_|  \___/ \__, |_|  \__,_|_| |_| |_|
+                   __/ |                    
+                  |___/   
+"""
 #Getting the datas from the input file
 with open(FILENAME, 'r') as handler:
     datas = handler.readlines()
