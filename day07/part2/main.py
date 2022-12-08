@@ -14,7 +14,6 @@ CD_COMMAND      = 'cd'
 CD_ARG_ROOT     = '/'
 CD_ARG_DOWN     = '..'
 SIZE_POSITION   = 0
-THRESHOLD       = 100000
 CURRENT         = -1
 SIZE            = 1
 NAME            = 0
@@ -34,8 +33,7 @@ datas = []
 directories_dict     = {}
 folders_depth        = []
 total_size           = 0
-somme_size           = 0
-numbers_of_folder    = 0
+
 
 """
   ______                _   _                 

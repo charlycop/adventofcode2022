@@ -32,7 +32,6 @@ directories_dict     = {}
 folders_depth        = []
 total_size           = 0
 somme_size           = 0
-numbers_of_folder    = 0
 
 """
   ______                _   _                 
