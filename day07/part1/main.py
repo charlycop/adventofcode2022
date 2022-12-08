@@ -7,7 +7,6 @@
   \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 """
 FILENAME        = 'adventofcode/day07/inputs.txt'
-ROOT            = 0
 CD_CMD_POSITION = 1
 CD_ARG_POSITION = 2
 CD_COMMAND      = 'cd'
@@ -30,7 +29,6 @@ SIZE_ZERO       = 0
 """                                                
 datas = []
 directories_dict     = {}
-level_counter        = ROOT
 folders_depth        = []
 total_size           = 0
 somme_size           = 0
@@ -85,15 +83,12 @@ for line in datas:
         dest = line[CD_ARG_POSITION]
         
         if   dest == CD_ARG_ROOT : # initialisation
-            level_counter = ROOT
             folders_depth.append([CD_ARG_ROOT, SIZE_ZERO]) 
 
         elif dest == CD_ARG_DOWN :
-            level_counter -= 1
             add_to_dictionnary(folders_depth.pop())
         
         else : 
-            level_counter += 1
             folders_depth.append([dest, SIZE_ZERO])
     
     elif is_a_size(line):
