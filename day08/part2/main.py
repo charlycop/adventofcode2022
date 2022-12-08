@@ -24,8 +24,8 @@ class Side(IntEnum):
  | |__| | | (_) | |_) | (_| | \__ \
   \_____|_|\___/|_.__/ \__,_|_|___/
 """                                                
-datas            = []
-nb_visible_trees = 0
+datas             = []
+best_scenic_score = 0
 
 """
   ______                _   _                 
@@ -88,10 +88,9 @@ def nb_visible_top_bottom(side, ind_row, ind_col, datas, tree_size):
     return trees_viewed
 
 def get_scenic_score(ind_row, ind_col, datas):
-    tree_size = int(datas[ind_row][ind_col])
-    scenic_score = 1
+    tree_size    = int(datas[ind_row][ind_col])
 
-    scenic_score *= nb_visible_left_right(Side.left,   ind_row, ind_col, datas, tree_size)
+    scenic_score  = nb_visible_left_right(Side.left,   ind_row, ind_col, datas, tree_size)
     scenic_score *= nb_visible_left_right(Side.right,  ind_row, ind_col, datas, tree_size)
     scenic_score *= nb_visible_top_bottom(Side.top,    ind_row, ind_col, datas, tree_size)
     scenic_score *= nb_visible_top_bottom(Side.bottom, ind_row, ind_col, datas, tree_size)
@@ -119,7 +118,6 @@ for i in range(len(datas)) :
 
 nb_rows           = len(datas)
 nb_cols           = len(datas[0])
-best_scenic_score = 0
 
 for row in range(1,nb_rows-1):
     for col in range(1,nb_cols-1) :
