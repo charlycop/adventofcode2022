@@ -58,18 +58,14 @@ def move_H(direction, last_position):
     position_H = last_position[Node.H]
 
     # On enregistre l'ancienne position
-    last_position[Node.H][Coord.X_bef] = last_position[Node.H][Coord.X]
-    last_position[Node.H][Coord.Y_bef] = last_position[Node.H][Coord.Y]
+    last_position[Node.H][Coord.X_bef] = position_H[Coord.X]
+    last_position[Node.H][Coord.Y_bef] = position_H[Coord.Y]
 
     # On calcul la nouvelle position de H
-    if   direction == 'L':
-        position_H[Coord.X] -= 1
-    elif direction == 'R':
-        position_H[Coord.X] += 1
-    elif direction == 'U':
-        position_H[Coord.Y] += 1
-    elif direction == 'D':
-        position_H[Coord.Y] -= 1
+    if   direction == 'L': position_H[Coord.X] -= 1
+    elif direction == 'R': position_H[Coord.X] += 1
+    elif direction == 'U': position_H[Coord.Y] += 1
+    elif direction == 'D': position_H[Coord.Y] -= 1
 
 def add_T_coord(position, visited):
 
@@ -86,51 +82,46 @@ def move_Others(node, last_position, visited):
     pos_node_prec       = last_position[node-1]
     pos_node            = last_position[node]
 
-    diff_H_T  = [pos_node_prec[Coord.X] -   pos_node[Coord.X], pos_node_prec[Coord.Y] -   pos_node[Coord.Y]]
+    diff_H_T     = [pos_node_prec[Coord.X] - pos_node[Coord.X], pos_node_prec[Coord.Y] - pos_node[Coord.Y]]
+    abs_diff_H_T = [abs(diff_H_T[Coord.X]), abs(diff_H_T[Coord.Y])]
+
+    # si on a pas une différence d'au moins 2 on sort tout de suite
+    if abs_diff_H_T[Coord.X] < 2 and abs_diff_H_T[Coord.Y] < 2:
+        return
+
+    # On backup l'ancienne position avant de la modifier
+    pos_node[Coord.X_bef] = pos_node[Coord.X]
+    pos_node[Coord.Y_bef] = pos_node[Coord.Y]
     
-    if abs(diff_H_T[Coord.X]) == 2 or abs(diff_H_T[Coord.Y]) == 2:
-        #dans tous les cas on garde la position-1
-        last_position[node][Coord.X_bef] = last_position[node][Coord.X]
-        last_position[node][Coord.Y_bef] = last_position[node][Coord.Y]
+    # Si un des deux est egal a zero alors c'est une translation horizontal ou vertical
+    if   diff_H_T[Coord.Y] == 0 or diff_H_T[Coord.X] == 0 :
+        if   diff_H_T[Coord.X] ==  2 : pos_node[Coord.X] += 1
+        elif diff_H_T[Coord.X] == -2 : pos_node[Coord.X] -= 1
+        elif diff_H_T[Coord.Y] ==  2 : pos_node[Coord.Y] += 1
+        elif diff_H_T[Coord.Y] == -2 : pos_node[Coord.Y] -= 1
+
+    elif abs_diff_H_T[Coord.Y] == 1 : #implicit abs_diff_H_T[Coord.X] == 2
         
-        # translation horizontale ou verticale
-        if   diff_H_T[Coord.Y] == 0 or diff_H_T[Coord.X] == 0 :
-            if   diff_H_T[Coord.X] == 2  : last_position[node][Coord.X] += 1
-            elif diff_H_T[Coord.X] == -2 : last_position[node][Coord.X] -= 1
-            elif diff_H_T[Coord.Y] == 2  : last_position[node][Coord.Y] += 1
-            elif diff_H_T[Coord.Y] == -2 : last_position[node][Coord.Y] -= 1
-
-        # diagonale
-        elif abs(diff_H_T[Coord.X]) == 2 and abs(diff_H_T[Coord.Y]) == 2:
-
-            if diff_H_T[Coord.X] > 0 :
-                last_position[node][Coord.X]     +=  1
-            else:
-                last_position[node][Coord.X]     -=  1
-            
-            if diff_H_T[Coord.Y] > 0 :
-                last_position[node][Coord.Y]     +=  1
-            else:
-                last_position[node][Coord.Y]     -=  1
-
-        elif abs(diff_H_T[Coord.Y]) == 1 : #implicit abs(diff_H_T[Coord.X]) == 2
-            
-            last_position[node][Coord.Y]         +=  diff_H_T[Coord.Y]
-            if diff_H_T[Coord.X] > 0 :
-                last_position[node][Coord.X]     +=  1
-            else:
-                last_position[node][Coord.X]     -=  1
+        pos_node[Coord.Y] +=  diff_H_T[Coord.Y]
+        if diff_H_T[Coord.X] > 0 : pos_node[Coord.X]  +=  1
+        else :                     pos_node[Coord.X]  -=  1
+    
+    elif abs_diff_H_T[Coord.X] == 1 : #implicit abs_diff_H_T[Coord.Y] == 2
         
-        elif abs(diff_H_T[Coord.X]) == 1 : #implicit abs(diff_H_T[Coord.Y]) == 2
-            
-            last_position[node][Coord.X]         +=  diff_H_T[Coord.X]
-            if diff_H_T[Coord.Y] > 0 :
-                last_position[node][Coord.Y]     +=  1
-            else:
-                last_position[node][Coord.Y]     -=  1
+        pos_node[Coord.X] += diff_H_T[Coord.X]
+        if diff_H_T[Coord.Y] > 0 : pos_node[Coord.Y] +=  1
+        else :                     pos_node[Coord.Y] -=  1
 
-    if node == Node.T : 
-        add_T_coord(last_position[node], visited)
+    # Finalement: Si on a les deux coordonnées au dela de 1
+    else: 
+        if diff_H_T[Coord.X] > 0 : pos_node[Coord.X]  += 1
+        else:                      pos_node[Coord.X]  -= 1
+        
+        if diff_H_T[Coord.Y] > 0 : pos_node[Coord.Y]  += 1
+        else:                      pos_node[Coord.Y]  -= 1
+
+    # On enregistre la position de la queue si elle n'existe pas déjà
+    if node == Node.T : add_T_coord(pos_node, visited)
 
 
 """ 
