@@ -6,7 +6,7 @@
  | |___| (_) | | | \__ \ || (_| | | | | |_\__ \
   \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 """
-FILENAME        = 'adventofcode/day07/inputs.txt'
+FILENAME        = 'day07/inputs.txt'
 CD_CMD_POSITION = 1
 CD_ARG_POSITION = 2
 CD_COMMAND      = 'cd'

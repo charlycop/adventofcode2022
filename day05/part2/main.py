@@ -7,7 +7,7 @@ class move(IntEnum):
 
 target_info = {move.qty:0, move.src_pile:1, move.tgt_pile:2}
 
-filename       = 'adventofcode/day05/inputs.txt'
+filename       = 'day05/inputs.txt'
 datas          = []
 full_movements = []
 

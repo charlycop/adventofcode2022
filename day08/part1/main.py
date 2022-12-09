@@ -7,7 +7,7 @@ from enum import IntEnum
  | |___| (_) | | | \__ \ || (_| | | | | |_\__ \
   \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 """
-FILENAME        = 'adventofcode/day08/inputs.txt'
+FILENAME        = 'day08/inputs.txt'
 class Side(IntEnum):
    left      = 0
    right     = 1

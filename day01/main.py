@@ -1,4 +1,4 @@
-filename = 'adventofcode/day01/inputs.txt'
+filename = 'day01/inputs.txt'
 max_calories_all = []
 
 with open(filename, 'r') as handler:

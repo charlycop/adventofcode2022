@@ -1,7 +1,7 @@
 # declare constants 
 MARKER_LENGTH = 4
 
-filename = 'adventofcode/day06/inputs.txt'
+filename = 'day06/inputs.txt'
 datas = []
 
 with open(filename, 'r') as handler:
