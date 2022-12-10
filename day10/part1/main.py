@@ -99,3 +99,4 @@ for line in datas:
     execute_instruction(instr)
 
 print("Sum of the six signal strengths :", get_sum_signal_strenght(signal_strength))
+print(cpu[cpu_.nb_cycles])

@@ -12,6 +12,7 @@ class cpu_(IntEnum):
    nb_cycles= 0
    reg_X    = 1
    res_alu  = 2
+    
 
 """
    _____                _              _       
@@ -21,7 +22,11 @@ class cpu_(IntEnum):
  | |___| (_) | | | \__ \ || (_| | | | | |_\__ \
   \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 """
-FILENAME        = 'day10/inputs.txt'
+FILENAME         = 'day10/inputs.txt'
+NB_CHAR_PER_LINE = 40
+PIXEL_ON         = '#'
+PIXEL_OFF        = '.'
+CARRIAGE         = '\n'
 
 """
    _____ _       _           _     
@@ -34,7 +39,8 @@ FILENAME        = 'day10/inputs.txt'
 datas            = []
 cpu              = [0, 1, 1]
 cycles_needed    = {'addx':2, 'noop':1}
-signal_strength  = {20:0, 60:0, 100:0, 140:0, 180:0, 220:0}
+crt_screen       = ""
+
 
 """
   ______                _   _                 
@@ -44,20 +50,17 @@ signal_strength  = {20:0, 60:0, 100:0, 140:0, 180:0, 220:0}
  | |  | |_| | | | | (__| |_| | (_) | | | \__ \
  |_|   \__,_|_| |_|\___|\__|_|\___/|_| |_|___/
 """
-def get_sum_signal_strenght(signal_strenght_dict):
-    somme = 0
 
-    for value in signal_strenght_dict.values(): somme += value
+def update_screen(cycle, center_sprite):
+    pixel_pos     = (cycle-1) % NB_CHAR_PER_LINE
 
-    return somme
-
-def get_signal_strenght (x_value, cyclecount):
-
-    for cycle_target in signal_strength.keys():
-        if cycle_target == cyclecount : 
-            signal_strength[cycle_target] = cycle_target * x_value
-            break
-
+    global crt_screen
+    if (pixel_pos >= center_sprite-1 and pixel_pos <= center_sprite+1):
+           crt_screen += PIXEL_ON
+    else : crt_screen += PIXEL_OFF
+    
+    if pixel_pos == NB_CHAR_PER_LINE-1 : crt_screen += CARRIAGE
+    
 def execute_instruction(instruc):
     
     cpu[cpu_.reg_X]    = cpu[cpu_.res_alu]
@@ -65,7 +68,7 @@ def execute_instruction(instruc):
 
     for i in range(cycles_needed[instruc[cmd.inst]]):
         cpu[cpu_.nb_cycles] += 1
-        get_signal_strenght(cpu[cpu_.reg_X], cpu[cpu_.nb_cycles])
+        update_screen(cpu[cpu_.nb_cycles], cpu[cpu_.reg_X])
 
 def decode_instruction(line):
     line  = line.split()
@@ -98,4 +101,4 @@ for line in datas:
     instr = decode_instruction(line)
     execute_instruction(instr)
 
-print("Sum of the six signal strengths :", get_sum_signal_strenght(signal_strength))
+print(crt_screen)
