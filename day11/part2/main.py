@@ -7,7 +7,6 @@
   \_____\___/|_| |_|___/\__\__,_|_| |_|\__|___/
 """
 FILENAME          = 'day11/inputs.txt'
-#FILENAME           = 'day11/inputs_tests.txt'
 nb_line_per_moneys = 7
 
 """
@@ -51,9 +50,6 @@ def karatsuba(m,n):
         bd = karatsuba(b, d)
         ad_plus_bc = karatsuba(a + b, c + d) - ac - bd
         return ac*10**(2 * mid) + ad_plus_bc*10**(mid) + bd
-
-def reduce_worry2(x): # part 2 
-    return x % ppcm 
 
 def clean_convert_items(dirty_items):
     clean_items = []
@@ -131,10 +127,8 @@ def get_dividors():
 def compute_lcm(x, y):
 
    # choose the greater number
-   if x > y:
-       greater = x
-   else:
-       greater = y
+   if x > y: greater = x
+   else:     greater = y
 
    while(True):
        if((greater % x == 0) and (greater % y == 0)):
@@ -150,6 +144,9 @@ def compute_lcm_many(numbers):
         res = compute_lcm(res, numbers[i])
     return res
 
+def reduce_worry2(x): # part 2 
+    return x % ppcm 
+    
 """ 
   _____                                     
  |  __ \                                    
